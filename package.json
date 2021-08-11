@@ -17,8 +17,5 @@
     "url": "https://github.com/MyUserNameIsMyUserName/V__Arena/issues"
   },
   "homepage": "https://github.com/MyUserNameIsMyUserName/V__Arena#readme",
-  "dependencies": {
-    "express": "^4.17.1",
-    "v_node_gears": "https://github.com/V-tech-tools/.V.__.NodeGears.git"
-  }
+  "dependencies": {}
 }
