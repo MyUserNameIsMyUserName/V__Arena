@@ -1,10 +1,35 @@
+
+require("dotenv").config();
+const compression = require("compression");
 const path = require("path");
+const bodyParser = require("body-parser");
 const express = require("express");
+const isOnline = require("is-online");
 const app = express();
-const port = 3000;
+const _DevMode = require("../helper_modules/is_dev/is_dev_mode");
+const [APP_URL, APP_FOLDER, APP_PORT, APP_HOST, APP_PROTOCOL ] = require("../helper_modules/app_url/env_app_url")
+//check if online
+(async () => {
+  console.log(await isOnline());
+  //=> true
+  console.info("YEA WE ARE ONLINE");
+})();
+// END IsOnline
 
-app.use("/", express.static(path.join(__dirname, "/[_.V._]_Sample/web")));
+if (_DevMode) {
+	console.info("DEV MODE ON!");
+} else {
+	console.info("PRODUCTION MODE ON!");
+};
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+
+
+app.use(compression());
+
+app.use("/", express.static(path.join(__dirname, "/PUBLIC")));
+
+
+// Start server
+app.listen(APP_PORT, () => {
+  console.log(`Server up and running on ${APP_URL}`);
 });
