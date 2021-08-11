@@ -1,11 +1,12 @@
-
 /*jshint esversion: 6 */
 const dbgMode = 3; // 0 -> false, 1 -> true, 2 -> 'full' and  3 -> 'extended' ;
+
 var mouseX = mouseY = 0;
 var circles = [];
 
-var c = new Circle(200, 200, 10, 'red');
-circles.push(c);
+
+//var c = new Circle(200, 200, 10, 'red');
+//circles.push(c);
 
 
 const mainApp = {
@@ -34,7 +35,7 @@ const mainApp = {
       //document.body.innerHTML += `<canvas id='cam1' class="gameCam" width="800" height="800"></canvas>`;
       mainApp.camEl = document.getElementById('cam2');
       mainApp.camEl.style.border = '1px solid black';
-      appInp.start();
+      AppInputs.start();
     },
     drawAll: function(){
       this.drawCursor();
@@ -76,6 +77,7 @@ const mainApp = {
 }
 
 
+const AppInputs = require("./inputs/user_inputs")
 
 mainApp.methods.start();
 

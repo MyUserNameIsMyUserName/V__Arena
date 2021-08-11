@@ -1,13 +1,14 @@
 {
-  "name": "V__Arena",
+  "name": "v__arena",
   "version": "1.0.0",
   "description": "V__Arena",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-		"scss_to_css": "node-sass -r app_src/style/ -o app_src/style/ --output-style compressed",
-		"webpack": "webpack --config webpack.config.js",
-		"server": "node server/index.js"
+    "scss_to_css": "node-sass -r app_src/style/ -o app_src/style/ --output-style compressed",
+    "webpack": "webpack --config webpack.config.js",
+    "dev_pack": "nodemon --exec npm run webpack",
+    "server": "node server/index.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,10 @@
     "systeminformation": "^5.8.0",
     "web-vitals": "^2.1.0",
     "webpack": "^5.50.0",
-    "webpack-cli": "^4.7.2"
+    "webpack-cli": "^4.7.2",
+    "v_cli_bash_do": "https://github.com/V-tech-tools/v_cli_bash_do.git",
+    "v_file_read": "https://github.com/V-tech-tools/v_file_read.git",
+    "v_dir_list": "https://github.com/V-tech-tools/v_dir_list",
+    "v_uni": "https://github.com/V-tech-tools/v_uni.git"
   }
 }

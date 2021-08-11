@@ -5,7 +5,9 @@ const config = {
   production: {
     mode: "production",
 		target: ["web"],
-    entry: "./app_src/v_app.js",
+    entry: {
+			v_app: "./app_src/v_app.js"
+		},
     output: {
       path: path.resolve(__dirname, "PUBLIC"),
       filename: "[name].v_pack.js",
@@ -27,7 +29,9 @@ const config = {
   development: {
     mode: "development",
 		target: ["web"],
-    entry: "./app_src/v_app.js",
+    entry: {
+			v_app: "./app_src/v_app.js"
+		},
     output: {
       path: path.resolve(__dirname, "PUBLIC"),
       filename: "[name].v_pack.js",
@@ -48,7 +52,9 @@ const config = {
   none: {
     mode: "none",
 		target: ["web"],
-    entry: "./app_src/v_app.js",
+    entry: {
+			v_app: "./app_src/v_app.js"
+		},
     output: {
       path: path.resolve(__dirname, "PUBLIC"),
       filename: "[name].v_pack.js",
