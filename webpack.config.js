@@ -4,29 +4,68 @@ require("dotenv").config()
 const config = {
   production: {
     mode: "production",
+		target: ["web"],
     entry: "./app_src/v_app.js",
     output: {
       path: path.resolve(__dirname, "PUBLIC"),
-      filename: "[name].v_app.js",
+      filename: "[name].v_pack.js",
       clean: true,
     },
+		module: {
+			rules: [
+				{
+					test: /\.css$/i,
+					use: ["style-loader", "css-loader"],
+				},
+				{
+					test: /\.(woff|woff2|eot|ttf|otf)$/i,
+					type: "asset/resource",
+				},
+			],
+		},
   },
   development: {
     mode: "development",
+		target: ["web"],
     entry: "./app_src/v_app.js",
     output: {
       path: path.resolve(__dirname, "PUBLIC"),
-      filename: "[name].v_app.js",
+      filename: "[name].v_pack.js",
     },
+		module: {
+			rules: [
+				{
+					test: /\.css$/i,
+					use: ["style-loader", "css-loader"],
+				},
+				{
+					test: /\.(woff|woff2|eot|ttf|otf)$/i,
+					type: "asset/resource",
+				},
+			],
+		},
   },
   none: {
     mode: "none",
+		target: ["web"],
     entry: "./app_src/v_app.js",
     output: {
       path: path.resolve(__dirname, "PUBLIC"),
-      filename: "[name].v_app.js",
+      filename: "[name].v_pack.js",
       clean: true,
     },
+		module: {
+			rules: [
+				{
+					test: /\.css$/i,
+					use: ["style-loader", "css-loader"],
+				},
+				{
+					test: /\.(woff|woff2|eot|ttf|otf)$/i,
+					type: "asset/resource",
+				},
+			],
+		},
   },
 };
 
