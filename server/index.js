@@ -7,7 +7,7 @@ const express = require("express");
 const isOnline = require("is-online");
 const app = express();
 const _DevMode = require("../helper_modules/is_dev/is_dev_mode");
-const [APP_URL, APP_FOLDER, APP_PORT, APP_HOST, APP_PROTOCOL ] = require("../helper_modules/app_url/env_app_url")
+const [APP_URL, APP_FOLDER, APP_PORT, APP_HOST, APP_PROTOCOL ] = require("../helper_modules/app_url/env_app_url");
 //check if online
 (async () => {
   console.log(await isOnline());
@@ -16,17 +16,12 @@ const [APP_URL, APP_FOLDER, APP_PORT, APP_HOST, APP_PROTOCOL ] = require("../hel
 })();
 // END IsOnline
 
-if (_DevMode) {
-	console.info("DEV MODE ON!");
-} else {
-	console.info("PRODUCTION MODE ON!");
-};
 
 
 
 app.use(compression());
 
-app.use("/", express.static(path.join(__dirname, "/PUBLIC")));
+app.use("/", express.static(path.join(__dirname, "../PUBLIC")));
 
 
 // Start server

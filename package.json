@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-		"scss_to_css": "node-sass -r app_src/style/ -o app_src/style/ --output-style compressed"
+		"scss_to_css": "node-sass -r app_src/style/ -o app_src/style/ --output-style compressed",
+		"webpack": "webpack --config webpack.config.js",
+		"server": "node server/index.js"
   },
   "repository": {
     "type": "git",
