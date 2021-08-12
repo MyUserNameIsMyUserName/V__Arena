@@ -28,7 +28,7 @@ const V_DEV = V_App_Config.V_DEV; // <= Just an easier to to read later variable
 let isDevMode = require('./helper_modules/vfg_isDevMode/vfg_isDevMode');
 
 
-console.info( (V_DEV) ? "\n   ┌┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┐ \n <]╏ ▽ DEVELOPER_MODE ╏[>\n   └┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┘ \n" : "\n   ┏┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┓ \n <]╏ ▼ PRODUCION_MODE ╏[>\n   ┗┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛ \n  "+ V_App_Config );
+console.info( (V_DEV) ? ("\n   ┌┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┐ \n <]╏ ▽ DEVELOPER_MODE ╏[>\n   └┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┘ \n\n") : ("\n   ┏┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┓ \n <]╏ ▼ PRODUCION_MODE ╏[>\n   ┗┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛ \n\n  "+ JSON.stringify(V_App_Config)) );
 
 module.exports = {
     V_App_Config,
