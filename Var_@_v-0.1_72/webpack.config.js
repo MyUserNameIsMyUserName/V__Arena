@@ -6,7 +6,7 @@ const config = {
     mode: "production",
 		target: ["web"],
     entry: {
-			V_Arena_Main: "./app_src/V_Arena_Main.js"
+			Vapp: "./app_src/V_Arena_Main.js"
 		},
     output: {
       path: path.resolve(__dirname, "PUBLIC"),
@@ -30,7 +30,7 @@ const config = {
     mode: "development",
 		target: ["web"],
     entry: {
-			v_app: "./app_src/v_app.js"
+			Vapp: "./app_src/V_Arena_Main.js"
 		},
     output: {
       path: path.resolve(__dirname, "PUBLIC"),
