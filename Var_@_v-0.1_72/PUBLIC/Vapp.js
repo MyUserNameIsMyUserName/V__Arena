@@ -1,5 +1,5 @@
 /*jshint esversion: 6 */
-$(function() {
+(function() {
   const FADE_TIME = 150; // ms
   const TYPING_TIMER_LENGTH = 400; // ms
   const COLORS = [
@@ -8,14 +8,22 @@ $(function() {
     '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
   ];
 
+  const VueryDOM = (elemSelector = null) => {
+    if (elemSelector === null) {
+      return document;
+    } else {
+      var elem = document.querySelector(elemSelector);
+      return elem;
+    }
+  };
   // Initialize variables
-  const $window = $(window);
-  const $usernameInput = $('.usernameInput'); // Input for username
-  const $messages = $('.messages');           // Messages area
-  const $inputMessage = $('.inputMessage');   // Input message input box
+  const $window = window;
+  const $usernameInput = VueryDOM('.usernameInput'); // Input for username
+  const $messages = VueryDOM('.messages');           // Messages area
+  const $inputMessage = VueryDOM('.inputMessage');   // Input message input box
 
-  const $loginPage = $('.login.page');        // The login page
-  const $chatPage = $('.chat.page');          // The chatroom page
+  const $loginPage = VueryDOM('.login.page');        // The login page
+  const $chatPage = VueryDOM('.chat.page');          // The chatroom page
 
   const socket = io();
 
@@ -24,7 +32,7 @@ $(function() {
   let connected = false;
   let typing = false;
   let lastTypingTime;
-  let $currentInput = $usernameInput.focus();
+  let $currentInput = $usernameInput;
 
   const addParticipantsMessage = (data) => {
     let message = '';
@@ -38,14 +46,14 @@ $(function() {
 
   // Sets the client's username
   const setUsername = () => {
-    username = cleanInput($usernameInput.val().trim());
+    username = cleanInput($usernameInput.value.trim());
 
     // If the username is valid
     if (username) {
-      $loginPage.fadeOut();
-      $chatPage.show();
-      $loginPage.off('click');
-      $currentInput = $inputMessage.focus();
+      $loginPage.style.display = "none";
+      $chatPage.style.display = "list-item";
+      $loginPage.removeEventListener('click', ()=>{});
+      $currentInput = $inputMessage;
 
       // Tell the server your username
       socket.emit('add user', username);
@@ -54,12 +62,12 @@ $(function() {
 
   // Sends a chat message
   const sendMessage = () => {
-    let message = $inputMessage.val();
+    let message = $inputMessage.value;
     // Prevent markup from being injected into the message
     message = cleanInput(message);
     // if there is a non-empty message and a socket connection
     if (message && connected) {
-      $inputMessage.val('');
+      $inputMessage.value = "";
       addChatMessage({ username, message });
       // tell server to execute 'new message' and send along one parameter
       socket.emit('new message', message);
@@ -68,7 +76,7 @@ $(function() {
 
   // Log a message
   const log = (message, options) => {
-    const $el = $('<li>').addClass('log').text(message);
+    const $el = '<li class="log">'+(message)+'</li>';
     addMessageElement($el, options);
   };
 
@@ -78,20 +86,16 @@ $(function() {
     const $typingMessages = getTypingMessages(data);
     if ($typingMessages.length !== 0) {
       options.fade = false;
-      $typingMessages.remove();
+      $typingMessages.forEach( item => {
+        item.remove();
+      });
     }
 
-    const $usernameDiv = $('<span class="username"/>')
-      .text(data.username)
-      .css('color', getUsernameColor(data.username));
-    const $messageBodyDiv = $('<span class="messageBody">')
-      .text(data.message);
+    const $usernameDiv = '<span class="username" style="color : '+getUsernameColor(data.username)+'">'+data.username+'</span>';
+    const $messageBodyDiv = '<span class="messageBody">'+(data.message)+'</span>';
 
     const typingClass = data.typing ? 'typing' : '';
-    const $messageDiv = $('<li class="message"/>')
-      .data('username', data.username)
-      .addClass(typingClass)
-      .append($usernameDiv, $messageBodyDiv);
+    const $messageDiv = '<li class="message '+typingClass+'" username="'+data.username+'">'+$usernameDiv + $messageBodyDiv + '</li>';
 
     addMessageElement($messageDiv, options);
   };
@@ -105,8 +109,8 @@ $(function() {
 
   // Removes the visual chat typing message
   const removeChatTyping = (data) => {
-    getTypingMessages(data).fadeOut(function () {
-      $(this).remove();
+    getTypingMessages(data).forEach( item => {
+      item.remove();
     });
   };
 
@@ -116,7 +120,7 @@ $(function() {
   // options.prepend - If the element should prepend
   //   all other messages (default = false)
   const addMessageElement = (el, options) => {
-    const $el = $(el);
+    const $el = el;
     // Setup default options
     if (!options) {
       options = {};
@@ -129,21 +133,29 @@ $(function() {
     }
 
     // Apply options
-    if (options.fade) {
-      $el.hide().fadeIn(FADE_TIME);
-    }
+    //if (options.fade) {
+    //  $el.hide().fadeIn(FADE_TIME);
+    //}
     if (options.prepend) {
-      $messages.prepend($el);
+      $messages.insertAdjacentHTML('afterbegin', $el);
     } else {
-      $messages.append($el);
+      $messages.insertAdjacentHTML('beforeend', $el);
     }
-
-    $messages[0].scrollTop = $messages[0].scrollHeight;
+    // First check that the element has child nodes
+    if ($messages.hasChildNodes()) {
+      let children = $messages.childNodes;
+      console.info("CHILDREN >> " + children.length);
+      for (let i = 0; i < children.length; i++) {
+        // do something with each child as children[i]
+        // NOTE: List is live! Adding or removing children will change the list's `length`
+        children[0].scrollTop = children[0].scrollHeight;
+      }
+    }
   };
 
   // Prevents input from having injected markup
   const cleanInput = (input) => {
-    return $('<div/>').text(input).html();
+    return input;
   };
 
   // Updates the typing event
@@ -168,11 +180,8 @@ $(function() {
 
   // Gets the 'X is typing' messages of a user
   const getTypingMessages = (data) => {
-    return $('.typing.message').filter(function (i) {
-      return $(this).data('username') === data.username;
-    });
+    return document.querySelectorAll('.typing.message[username="'+data.username+'"]');
   };
-
   // Gets the color of a username through our hash function
   const getUsernameColor = (username) => {
     // Compute hash code
@@ -187,7 +196,7 @@ $(function() {
 
   // Keyboard events
 
-  $window.keydown(event => {
+  window.addEventListener('keydown', event => {
     // Auto-focus the current input when a key is typed
     if (!(event.ctrlKey || event.metaKey || event.altKey)) {
       $currentInput.focus();
@@ -204,19 +213,19 @@ $(function() {
     }
   });
 
-  $inputMessage.on('input', () => {
+  $inputMessage.addEventListener('input', () => {
     updateTyping();
   });
 
   // Click events
 
   // Focus input when clicking anywhere on login page
-  $loginPage.click(() => {
+  $loginPage.addEventListener('click',() => {
     $currentInput.focus();
   });
 
   // Focus input when clicking on the message input's border
-  $inputMessage.click(() => {
+  $inputMessage.addEventListener('click',() => {
     $inputMessage.focus();
   });
 
@@ -276,4 +285,4 @@ $(function() {
     log('attempt to reconnect has failed');
   });
 
-});
+})();
