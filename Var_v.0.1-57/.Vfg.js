@@ -1,15 +1,12 @@
-/*jshint esversion: 6 */
-
 // ╔═══════════════════════════════════╗
-// ║ ◭  V_Arena Config => [ .Vfg ]  ◮ ║
+// ║ ◭  V_Arena Config => [ .Vfg ]  ◮                               ║
 // ╟───────────────────────────────────╢
-// ╠ ◔ INFO :                       ◬ ╣
-// ╠ Probably a bad idea but I still   ╣
-// ╠ do not have an ide why. Why not   ╣
-// ╠ make things custom yet by the     ╣
-// ╠ standard                          ╣
-// ╟┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄╢
-// ╠ ◁ Author : -<[_.V._]>-         ▷ ╣
+// ||  ◔ INFO :                       ◬                                          ||
+// ╠ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ╣ 
+// || make things custom yet by the                                  ||
+// || standard                                                                     ||
+// ╠ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -╣ 
+// ||◁ Author : -<[_.V._]>-                                        ▷      ╣ 
 // ╚═══════════════════════════════════╝
 
 
@@ -21,7 +18,7 @@ const V_App_Config = {
     PORT            :   4411,           // Application port to use
     FOLDER          :   "",             // If located i a folder
     ACCEPT_UNSAFE   :   ( (this.V_DEV === true) ? true : false ) ,  // <<-] Something ne to keep in mind that it will reject all unsafe connections.
-}
+};
 
 const V_DEV = V_App_Config.V_DEV; // <= Just an easier to to read later variable.
 
@@ -33,4 +30,4 @@ console.info( (V_DEV) ? "\n   ┌┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄�
 module.exports = {
     V_App_Config,
     V_DEV,
-}
+};
