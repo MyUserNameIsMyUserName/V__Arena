@@ -1,8 +1,0 @@
-{
-  "ignore": [
-		"dist/*", 
-		"PUBLIC/*", 
-		"node_modules/*", 
-		"Awesome-Node.js-Helpout/*"
-	]
-}
