@@ -6,11 +6,11 @@ const config = {
     mode: "production",
 		target: ["web"],
     entry: {
-			v_app: "./app_src/v_app.js"
+			Vapp: "./app_src/V_Arena_Main.js"
 		},
     output: {
       path: path.resolve(__dirname, "PUBLIC"),
-      filename: "[name].v_pack.js",
+      filename: "[name].vack.js",   // haha... V_PACK -> VACK :D 
       clean: true,
     },
 		module: {
@@ -30,7 +30,7 @@ const config = {
     mode: "development",
 		target: ["web"],
     entry: {
-			v_app: "./app_src/v_app.js"
+			Vapp: "./app_src/V_Arena_Main.js"
 		},
     output: {
       path: path.resolve(__dirname, "PUBLIC"),
