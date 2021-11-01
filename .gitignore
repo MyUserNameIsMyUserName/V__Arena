@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+
+# Honestly never figured why by less prone to file once package-lock.json is ignored.
+package-lock.json
