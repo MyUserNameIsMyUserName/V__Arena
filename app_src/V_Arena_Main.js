@@ -11,7 +11,7 @@ console.info("[ V__ARENA - < Var__v-0.1-72 > ]");
     '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
   ];
 
-  const VueryDOM = (elemSelector = null) => {
+  const vDOM = (elemSelector = null) => {
     if (elemSelector === null) {
       return document;
     } else {
@@ -21,12 +21,12 @@ console.info("[ V__ARENA - < Var__v-0.1-72 > ]");
   };
   // Initialize variables
   const $window = window;
-  const $usernameInput = VueryDOM('.usernameInput'); // Input for username
-  const $messages = VueryDOM('.messages');           // Messages area
-  const $inputMessage = VueryDOM('.inputMessage');   // Input message input box
+  const $usernameInput = vDOM('.usernameInput'); // Input for username
+  const $messages = vDOM('.messages');           // Messages area
+  const $inputMessage = vDOM('.inputMessage');   // Input message input box
 
-  const $loginPage = VueryDOM('.login.page');        // The login page
-  const $chatPage = VueryDOM('.chat.page');          // The chatroom page
+  const $loginPage = vDOM('.login.page');        // The login page
+  const $chatPage = vDOM('.chat.page');          // The chatroom page
 
   const socket = io();
 

@@ -20,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'PUBLIC')));
 let numUsers = 0;
 
 io.on('connection', (socket) => {
+
   let addedUser = false;
 
   // when the client emits 'new message', this listens and executes
@@ -75,4 +76,5 @@ io.on('connection', (socket) => {
       });
     }
   });
+  
 });
