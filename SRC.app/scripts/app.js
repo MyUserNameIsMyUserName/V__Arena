@@ -22,6 +22,7 @@ console.info("[ V__ARENA - < Var__v-0.1-72 > ]");
   // Initialize variables
   const $window = window;
   const $usernameInput = vDOM('.usernameInput'); // Input for username
+  const $passwordInput = vDOM('.passwordInput'); // Input for password
   const $messages = vDOM('.messages');           // Messages area
   const $inputMessage = vDOM('.inputMessage');   // Input message input box
 
@@ -39,10 +40,10 @@ console.info("[ V__ARENA - < Var__v-0.1-72 > ]");
 
   const addParticipantsMessage = (data) => {
     let message = '';
-    if (data.numUsers === 1) {
+    if (data.liveUsersCount === 1) {
       message += `there's 1 participant`;
     } else {
-      message += `there are ${data.numUsers} participants`;
+      message += `there are ${data.liveUsersCount} participants`;
     }
     log(message);
   };
@@ -50,16 +51,14 @@ console.info("[ V__ARENA - < Var__v-0.1-72 > ]");
   // Sets the client's username
   const setUsername = () => {
     username = cleanInput($usernameInput.value.trim());
+    var password = cleanInput($passwordInput.value.trim());
 
     // If the username is valid
-    if (username) {
-      $loginPage.style.display = "none";
-      $chatPage.style.display = "list-item";
-      $loginPage.removeEventListener('click', ()=>{});
-      $currentInput = $inputMessage;
-
+    if (username && password) {
       // Tell the server your username
-      socket.emit('add user', username);
+      socket.emit('login user', username, password);
+    } else {
+      alert('username or password is missing or invalid');
     }
   };
 
@@ -200,10 +199,7 @@ console.info("[ V__ARENA - < Var__v-0.1-72 > ]");
   // Keyboard events
 
   window.addEventListener('keydown', event => {
-    // Auto-focus the current input when a key is typed
-    if (!(event.ctrlKey || event.metaKey || event.altKey)) {
-      $currentInput.focus();
-    }
+    
     // When the client hits ENTER on their keyboard
     if (event.which === 13) {
       if (username) {
@@ -223,26 +219,35 @@ console.info("[ V__ARENA - < Var__v-0.1-72 > ]");
   // Click events
 
   // Focus input when clicking anywhere on login page
-  $loginPage.addEventListener('click',() => {
-    $currentInput.focus();
-  });
+  //$loginPage.addEventListener('click',() => {
+  //  $currentInput.focus();
+  //});
 
   // Focus input when clicking on the message input's border
-  $inputMessage.addEventListener('click',() => {
-    $inputMessage.focus();
-  });
+  //$inputMessage.addEventListener('click',() => {
+  //  $inputMessage.focus();
+  //});
 
   // Socket events
 
   // Whenever the server emits 'login', log the login message
   socket.on('login', (data) => {
-    connected = true;
-    // Display the welcome message
-    const message = 'Welcome to Socket.IO Chat - ';
-    log(message, {
-      prepend: true
-    });
-    addParticipantsMessage(data);
+    if (data !== false) {
+      
+      $loginPage.style.display = "none";
+      $chatPage.style.display = "list-item";
+      $loginPage.removeEventListener('click', ()=>{});
+      $currentInput = $inputMessage;
+      connected = true;
+      // Display the welcome message
+      const message = 'Welcome to Socket.IO Chat - ';
+      log(message, {
+        prepend: true
+      });
+      addParticipantsMessage(data);
+    } else {
+      alert("Bad Login Info");
+    }
   });
 
   // Whenever the server emits 'new message', update the chat body

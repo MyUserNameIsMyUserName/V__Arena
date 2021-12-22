@@ -6,7 +6,7 @@ const config = {
 		mode: "production",
 		target: ["web"],
 		entry: {
-			Vapp: "./app_src/V_Arena_Main.js"
+			Vapp: "./SRC.app/scripts/app.js"
 		},
 		output: {
 			path: path.resolve(__dirname, "PUBLIC"),
@@ -30,35 +30,11 @@ const config = {
 		mode: "development",
 		target: ["web"],
 		entry: {
-			Vapp: "./app_src/V_Arena_Main.js"
+			Vapp: "./SRC.app/scripts/app.js"
 		},
 		output: {
 			path: path.resolve(__dirname, "PUBLIC"),
 			filename: "[name].v_pack.js",
-		},
-		module: {
-			rules: [
-				{
-					test: /\.css$/i,
-					use: ["style-loader", "css-loader"],
-				},
-				{
-					test: /\.(woff|woff2|eot|ttf|otf)$/i,
-					type: "asset/resource",
-				},
-			],
-		},
-	},
-	none: {
-		mode: "none",
-		target: ["web"],
-		entry: {
-			v_app: "./app_src/v_app.js"
-		},
-		output: {
-			path: path.resolve(__dirname, "PUBLIC"),
-			filename: "[name].v_pack.js",
-			clean: true,
 		},
 		module: {
 			rules: [
