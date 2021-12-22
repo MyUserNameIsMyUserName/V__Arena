@@ -1,18 +1,18 @@
-const path = require("path")
+const path = require("path");
 const V_DEV = require("./.Vfg");
 
 const config = {
-  production: {
-    mode: "production",
+	production: {
+		mode: "production",
 		target: ["web"],
-    entry: {
+		entry: {
 			Vapp: "./app_src/V_Arena_Main.js"
 		},
-    output: {
-      path: path.resolve(__dirname, "PUBLIC"),
-      filename: "[name].vack.js",   // haha... V_PACK -> VACK :D 
-      clean: true,
-    },
+		output: {
+			path: path.resolve(__dirname, "PUBLIC"),
+			filename: "[name].v_pack.js",   // haha... V_PACK -> VACK :D 
+			clean: true,
+		},
 		module: {
 			rules: [
 				{
@@ -25,17 +25,17 @@ const config = {
 				},
 			],
 		},
-  },
-  development: {
-    mode: "development",
+	},
+	development: {
+		mode: "development",
 		target: ["web"],
-    entry: {
+		entry: {
 			Vapp: "./app_src/V_Arena_Main.js"
 		},
-    output: {
-      path: path.resolve(__dirname, "PUBLIC"),
-      filename: "[name].v_pack.js",
-    },
+		output: {
+			path: path.resolve(__dirname, "PUBLIC"),
+			filename: "[name].v_pack.js",
+		},
 		module: {
 			rules: [
 				{
@@ -48,18 +48,18 @@ const config = {
 				},
 			],
 		},
-  },
-  none: {
-    mode: "none",
+	},
+	none: {
+		mode: "none",
 		target: ["web"],
-    entry: {
+		entry: {
 			v_app: "./app_src/v_app.js"
 		},
-    output: {
-      path: path.resolve(__dirname, "PUBLIC"),
-      filename: "[name].v_pack.js",
-      clean: true,
-    },
+		output: {
+			path: path.resolve(__dirname, "PUBLIC"),
+			filename: "[name].v_pack.js",
+			clean: true,
+		},
 		module: {
 			rules: [
 				{
@@ -72,12 +72,12 @@ const config = {
 				},
 			],
 		},
-  },
+	},
 };
 
 
-if (V_DEV){
-  module.exports = config.development
+if (V_DEV) {
+	module.exports = config.development;
 } else {
-  module.exports = config.production
+	module.exports = config.production;
 }
